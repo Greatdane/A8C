@@ -2,7 +2,7 @@
 import requests
 import csv
 
-token = "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"
+token = "GitHub API Token"
 headers = {'Authorization': 'token ' + token}
 
 filename = 'file.csv'
