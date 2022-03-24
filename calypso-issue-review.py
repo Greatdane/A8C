@@ -21,6 +21,16 @@ with open(filename, 'r') as csvfile:
                 data = response.json()
                 # Get state (open or closed)
                 row_list.append(data["state"])
+
+                # Get days between open and closed (if closed)
+                if data["state"] == "closed":
+                    created_at = datetime.strptime(data["created_at"][:9], '%Y-%m-%d')
+                    closed_at = datetime.strptime(data["closed_at"][:9], '%Y-%m-%d')
+                    print((closed_at-created_at).days)
+                    row_list.append((closed_at-created_at).days)
+                else:
+                    row_list.append("")
+
                 # Get labels (Bug, Feature Request or Enhancement)
                 for label in data["labels"]:
                     if label['name'] == "[Type] Bug":
