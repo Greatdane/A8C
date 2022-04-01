@@ -3,7 +3,7 @@ import requests
 import csv
 from datetime import datetime
 
-token = "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"
+token = "GitHub API Token"
 headers = {'Authorization': f'token {token}'}
 
 filename = 'file.csv'
