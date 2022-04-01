@@ -1,9 +1,10 @@
 #Quick and dirty GitHub API call for PA Triagers to get issue date from wp-calypso
 import requests
 import csv
+from datetime import datetime
 
-token = "GitHub API Token"
-headers = {'Authorization': 'token ' + token}
+token = "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"
+headers = {'Authorization': f'token {token}'}
 
 filename = 'file.csv'
 
@@ -24,9 +25,8 @@ with open(filename, 'r') as csvfile:
 
                 # Get days between open and closed (if closed)
                 if data["state"] == "closed":
-                    created_at = datetime.strptime(data["created_at"][:9], '%Y-%m-%d')
-                    closed_at = datetime.strptime(data["closed_at"][:9], '%Y-%m-%d')
-                    print((closed_at-created_at).days)
+                    created_at = datetime.strptime(data["created_at"][:10], '%Y-%m-%d')
+                    closed_at = datetime.strptime(data["closed_at"][:10], '%Y-%m-%d')
                     row_list.append((closed_at-created_at).days)
                 else:
                     row_list.append("")
